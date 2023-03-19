@@ -1,0 +1,72 @@
+
+describe('Atualizacoes do My Info + Login', () => {
+
+  //Estamos fazendo um teste simples de login 
+  it('Login - Teste Simples', function(){
+  cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+  cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('Admin');
+  cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('admin123');
+  cy.get('.oxd-button').click();
+}) 
+
+  //Teste de CSS - Dashboard - Punch In 
+  it.only('Teste de CSS - Dashboard - Punch In', function(){
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('Admin');
+    cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('admin123');
+    cy.get('.oxd-button').click();
+    cy.get('.orangehrm-attendance-card-state')
+    .should('have.css', 'color', 'rgb(255, 123, 29)') //cor do elemento
+    .should('have.css', 'font-size', '12px')  //font size;
+    .should('have.css', 'font-family', '"Nunito Sans"'); //nome da fonte do texto
+  }) 
+
+
+
+  //Teste de atualizacao do My Info - Nickname
+  it('My Info - Nickname', function(){
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('Admin');
+    cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('admin123');
+    cy.get('.oxd-button').click();
+    cy.get(':nth-child(6) > .oxd-main-menu-item > .oxd-text').click();
+    cy.get(':nth-child(1) > .oxd-grid-3 > .oxd-grid-item > .oxd-input-group > :nth-child(2) > .oxd-input').click().clear().type('Renata');
+    cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button').click();
+    cy.wait(3000);
+    cy.get('.--name-grouped-field > :nth-child(1) > :nth-child(2) > .oxd-input').click().clear().type('Sandy');
+  }) 
+
+  //Testes de Assertions (como o codigo deve funcionar para algo especifico)
+  it('Assertion - exist', function(){
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('Admin');
+    cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('admin123');
+    cy.get('.oxd-button').click();
+    cy.get(':nth-child(6) > .oxd-main-menu-item > .oxd-text').click();
+    cy.get(':nth-child(1) > .oxd-form > :nth-child(1) > .oxd-grid-3 > .oxd-grid-item > .oxd-input-group > .oxd-input-group__label-wrapper > .oxd-label')
+    .should('exist')
+  }) 
+
+  //Testes de Assertions (como o codigo deve funcionar para algo especifico)
+  it('Assertion - visible', function(){
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('Admin');
+    cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('admin123');
+    cy.get('.oxd-button').click();
+    cy.get(':nth-child(6) > .oxd-main-menu-item > .oxd-text').click();
+    cy.get(':nth-child(1) > .oxd-form > :nth-child(1) > .oxd-grid-3 > .oxd-grid-item > .oxd-input-group > .oxd-input-group__label-wrapper > .oxd-label')
+    .should('be.visible')
+  }) 
+
+  //Testes de Assertions (como o codigo deve funcionar para algo especifico)
+  it('Assertion - contain Nickname', function(){
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('Admin');
+    cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('admin123');
+    cy.get('.oxd-button').click();
+    cy.get(':nth-child(6) > .oxd-main-menu-item > .oxd-text').click();
+    cy.get(':nth-child(1) > .oxd-form > :nth-child(1) > .oxd-grid-3 > .oxd-grid-item > .oxd-input-group > .oxd-input-group__label-wrapper > .oxd-label')
+    .should('contain', 'Nickname');
+  }) 
+
+})
