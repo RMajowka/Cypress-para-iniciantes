@@ -1,0 +1,70 @@
+describe('Desktop - Projeto Final - Homepage UI', () => {
+  it('UI da Homepage - Title', () => {
+
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.title('OrangeHRM');
+  })
+
+  it('UI da Homepage - Clicar + Digitar o Forget Password', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('.orangehrm-login-forgot > .oxd-text').click()
+    cy.get('.oxd-input').type('admin123');
+  })
+
+  it('UI da Homepage - Esperar + Clicar o Forget Password', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.wait(4000);
+    cy.get('.orangehrm-login-forgot > .oxd-text').click()
+  })
+
+  it('UI da Homepage - Logo deve existir e ser visivel', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('.orangehrm-login-branding > img').should('exist').should('be.visible');
+  })
+
+  it('UI da Homepage - Logo deve ter imagem correta', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('.orangehrm-login-branding > img').should('have.attr', 'src', '/web/images/ohrm_branding.png?1672659722816');
+  })
+  it('UI da Homepage - Login texto', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('.oxd-text--h5')
+    .should('contain', 'Login')
+  })
+  it('UI da Homepage - Login texto COR', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('.oxd-text--h5').should('have.css', 'color', 'rgb(100, 114, 140)') ;
+  })
+
+  it('UI da Homepage - Login texto TAMANHO', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('.oxd-text--h5').should('have.css', 'font-size', '25px')  ;
+  })
+
+  it('UI da Homepage - Login texto FONTE', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get('.oxd-text--h5').should('have.css', 'font-family', '"Nunito Sans"') ;
+  })
+})
+
+describe('Desktop - Projeto Final - Login', () => {
+  it('Login Simples', () => {
+    cy.viewport('macbook-11');
+    cy.viewport('macbook-15');
+    cy.viewport('macbook-16');
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.get(':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('admin');
+    cy.get(':nth-child(3) > .oxd-input-group > :nth-child(2) > .oxd-input').click().type('admin123');
+    cy.get('.oxd-button').click();
+  })
+
+})
+
+describe.only('Mobile - Projeto Final - Homepage UI', () => {
+  it('UI da Homepage - Title', () => {
+    cy.viewport('iphone-7');
+    cy.viewport('iphone-6', 'landscape')
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+
+  })
+})
